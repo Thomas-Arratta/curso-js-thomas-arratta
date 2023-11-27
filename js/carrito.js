@@ -33,7 +33,22 @@ const mostrarCarrito = () =>{
         let eliminar = carritoContent.querySelector(".delete-product");
 
         eliminar.addEventListener("click", () => {
-        eliminarProducto(product.id);
+            Swal.fire({
+                title: "Esta seguro de sacar el producto del carrito?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Si, seguro",
+                cancelButtonText: "No, no quiero",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    eliminarProducto(product.id);
+                    Swal.fire({
+                        title: "Borrado!",
+                        icon: "success",
+                        text: "El producto fue borrado",
+                    });
+                }
+            });
         });
     });
 
